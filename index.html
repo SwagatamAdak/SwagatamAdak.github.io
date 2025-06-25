@@ -1,108 +1,240 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swagatam Adak | Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+    <meta name="description" content="Portfolio of Swagatam Adak, a Computer Science student specializing in Cybersecurity, High-Level Synthesis, and Machine Learning.">
+    <meta name="keywords" content="Swagatam Adak, portfolio, cybersecurity, HLS, LLM, machine learning, hardware security, formal verification">
+    <meta name="author" content="Swagatam Adak">
+    <meta property="og:title" content="Swagatam Adak - Portfolio">
+    <meta property="og:description" content="Explore the projects, publications, and skills of Swagatam Adak, a Computer Science & Engineering student.">
+    <meta property="og:image" content="https://placehold.co/1200x630/1e293b/94a3b8?text=Swagatam+Adak">
+    <meta property="og:url" content="https://swagatamadak.github.io">
+    <meta property="og:type" content="website">
+    <title>Swagatam Adak - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <style>
+        :root {
+            --primary: #38bdf8; /* sky-400 */
+            --secondary: #3b82f6; /* blue-500 */
+            --accent: #6366f1; /* indigo-500 */
+            --dark: #0f172a; /* slate-900 */
+            --darker: #020617; /* slate-950 */
+            --light: #e2e8f0; /* slate-200 */
+            --bg-light: #f1f5f9; /* slate-100 */
+            --text-dark: #1e293b; /* slate-800 */
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
-            color: #e2e8f0; /* slate-200 */
+            font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            color: var(--light);
+            overflow-x: hidden;
         }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.5); /* slate-800 with opacity */
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(51, 65, 85, 0.5); /* slate-700 with opacity */
-            border-radius: 1.5rem;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
+
+        /* --- Light Theme --- */
+        body.light-theme {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e2e8f0 100%);
+            color: var(--text-dark);
         }
-        .glass-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgba(96, 165, 250, 0.5); /* blue-400 with opacity */
+        body.light-theme .glass-card,
+        body.light-theme .timeline-item {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
-        .section-title {
-            @apply text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-cyan-300;
+        body.light-theme nav {
+             background: rgba(241, 245, 249, 0.9);
         }
-        .skill-bubble {
-            @apply text-sm font-semibold px-4 py-2 rounded-full cursor-pointer transition-all duration-300;
-            background: rgba(51, 65, 85, 0.7); /* slate-700 */
-            border: 1px solid transparent;
+        body.light-theme .nav-links a { color: var(--text-dark); }
+        body.light-theme .mobile-menu-btn { color: var(--text-dark); }
+        body.light-theme .timeline-item::before { border-color: var(--bg-light); }
+        body.light-theme .skill-tag, body.light-theme .filter-btn.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); }
+        body.light-theme footer { background: rgba(0, 0, 0, 0.05); }
+
+
+        /* --- Loader & Particles --- */
+        .loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark); display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.5s ease; }
+        .loader.hidden { opacity: 0; pointer-events: none; }
+        .loader::before { content: ''; width: 50px; height: 50px; border: 5px solid var(--accent); border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+        .particle { position: absolute; width: 3px; height: 3px; background: rgba(56, 189, 248, 0.4); border-radius: 50%; animation: float 8s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.2); } }
+
+        /* --- Global Elements --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 100px 0; }
+        .section-title { text-align: center; font-size: clamp(2.5rem, 4vw, 3rem); margin-bottom: 4rem; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .glass-card { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); border-radius: 20px; transition: var(--transition); }
+        .glass-card:hover { transform: translateY(-10px); box-shadow: var(--shadow); border-color: rgba(56, 189, 248, 0.4); }
+
+        /* --- Navigation --- */
+        nav { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); z-index: 1000; padding: 1rem 0; transition: var(--transition); }
+        nav.scrolled { box-shadow: var(--shadow); background: rgba(15, 23, 42, 1); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--light); text-decoration: none; font-weight: 500; position: relative; transition: var(--transition); }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: linear-gradient(135deg, var(--primary), var(--accent)); transition: width 0.3s ease; }
+        .nav-links a:hover::after { width: 100%; }
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--light); font-size: 1.5rem; cursor: pointer; }
+        
+        /* --- Hero Section --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; text-align: center; position: relative; }
+        .hero-content { max-width: 900px; padding: 2rem; }
+        .hero-image { width: 180px; height: 180px; border-radius: 50%; margin: 0 auto 2rem; border: 5px solid rgba(56, 189, 248, 0.5); box-shadow: var(--shadow); object-fit: cover; }
+        .hero h1 { font-size: clamp(3rem, 6vw, 4.5rem); margin-bottom: 1rem; font-weight: 800; color: #fff; }
+        .hero .subtitle { font-size: clamp(1.2rem, 2vw, 1.5rem); margin-bottom: 2rem; opacity: 0.9; }
+        .hero .subtitle span { color: var(--primary); font-weight: 600; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 14px 32px; border: none; border-radius: 50px; cursor: pointer; font-size: 1rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: var(--transition); }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+        .btn-outline { background: transparent; color: var(--light); border: 2px solid var(--primary); }
+        .btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2); }
+        body.light-theme .btn-outline { color: var(--text-dark); }
+
+        /* --- About Section --- */
+        #about .glass-card { padding: 3rem; }
+        #about p {
+            margin-bottom: 1rem;
         }
-        .skill-bubble:hover {
-            transform: scale(1.1);
-            background: rgba(96, 165, 250, 0.2); /* blue-400 with opacity */
-            border-color: #60a5fa; /* blue-400 */
-            color: #60a5fa;
+        #about p:last-child {
+            margin-bottom: 0;
         }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -32px;
-            top: 4px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #38bdf8; /* sky-400 */
-            border: 4px solid #1e293b; /* slate-800 */
-            z-index: 1;
+
+
+        /* --- Skills Section --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .skill-category { padding: 2rem; text-align: center; }
+        .skill-category h3 { color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; justify-content: center; font-size: 1.25rem; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+        .skill-tag { background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(59, 130, 246, 0.2)); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; color: var(--light); }
+
+        /* --- Interests Section --- */
+        .interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .interest-card { padding: 1.5rem; text-align: center; font-weight: 500; }
+
+        /* --- Projects Section --- */
+        .project-filter { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+        .filter-btn { background: rgba(255, 255, 255, 0.1); border: none; padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; color: var(--light); transition: var(--transition); font-weight: 500; }
+        .filter-btn.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; }
+        .project-card { overflow: hidden; display: flex; flex-direction: column; }
+        .project-content { padding: 1.5rem; flex-grow: 1; }
+        .project-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: #fff; }
+        .project-card .conference { font-size: 0.9rem; font-weight: 600; color: var(--primary); margin-bottom: 1rem; }
+        
+        /* --- Experience & Education Timeline --- */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 10px; top: 0; height: 100%; width: 2px; background: linear-gradient(180deg, var(--primary), var(--accent)); }
+        .timeline-item { position: relative; margin-bottom: 2rem; padding: 1.5rem 1.5rem 1.5rem 3rem; }
+        .timeline-item::before { content: ''; position: absolute; left: 0px; top: 24px; width: 22px; height: 22px; background: var(--accent); border-radius: 50%; border: 4px solid var(--dark); z-index: 1; }
+        .timeline-date { color: var(--primary); font-weight: 600; margin-bottom: 0.5rem; }
+        .timeline-item h3 { font-size: 1.2rem; color: #fff; margin-bottom: 0.25rem; }
+
+        /* --- Certifications --- */
+        #certifications .glass-card { text-align: center; padding: 2rem; }
+        
+        /* --- Contact --- */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center; }
+        .contact-info a { color: var(--light); text-decoration: none; transition: var(--transition); }
+        .contact-info a:hover { color: var(--primary); }
+        .contact-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .contact-item i { font-size: 1.5rem; color: var(--primary); width: 30px; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 10px; background: rgba(255, 255, 255, 0.05); color: var(--light); }
+        .form-group input:focus, .form-group textarea:focus { outline: 2px solid var(--primary); }
+
+        /* --- Footer & Utils --- */
+        footer { text-align: center; padding: 3rem 2rem; background: rgba(0, 0, 0, 0.3); margin-top: 4rem; }
+        .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; list-style: none; }
+        .social-links a { color: var(--light); font-size: 1.5rem; transition: var(--transition); }
+        .social-links a:hover { color: var(--primary); transform: translateY(-5px); }
+        .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--primary); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: var(--transition); z-index: 1000; border: none; cursor: pointer; }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+        .progress-bar { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: linear-gradient(to right, var(--primary), var(--accent)); z-index: 9999; transition: width 0.1s ease-out; }
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .contact-grid { grid-template-columns: 1fr; }
         }
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(15, 23, 42, 0.98); padding: 2rem; text-align: center; }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+
     </style>
 </head>
-<body class="w-full h-full">
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader"></div>
 
-    <!-- Header & Navigation -->
-    <header class="bg-slate-900/60 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-lg">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <a href="#" class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-cyan-300">SA</a>
-                <nav class="hidden md:flex space-x-8 text-slate-300">
-                    <a href="#about" class="hover:text-sky-400 transition-colors duration-300">About</a>
-                    <a href="#skills" class="hover:text-sky-400 transition-colors duration-300">Skills</a>
-                    <a href="#interests" class="hover:text-sky-400 transition-colors duration-300">Interests</a>
-                    <a href="#projects" class="hover:text-sky-400 transition-colors duration-300">Projects</a>
-                    <a href="#experience" class="hover:text-sky-400 transition-colors duration-300">Experience</a>
-                    <a href="#education" class="hover:text-sky-400 transition-colors duration-300">Education</a>
-                    <a href="#contact" class="hover:text-sky-400 transition-colors duration-300">Contact</a>
-                </nav>
-            </div>
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" role="navigation">
+        <div class="nav-container container">
+            <a href="#" class="logo" role="img" aria-label="Swagatam Adak Logo">SA</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 pt-28">
-
+    <div class="container">
         <!-- Hero Section -->
-        <section id="hero" class="text-center py-24 flex flex-col items-center">
-             <div class="w-48 h-48 mb-8">
-                 <img src="https://placehold.co/400x400/334155/94a3b8?text=SA" alt="Swagatam Adak" class="rounded-full shadow-2xl border-4 border-slate-700 object-cover w-full h-full">
-            </div>
-            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-white">
-                Swagatam Adak
-            </h1>
-            <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-400 font-light">
-                Computer Science student passionate about <span class="font-semibold text-sky-400">Cybersecurity</span>, <span class="font-semibold text-teal-400">Remote Sensing</span>, and <span class="font-semibold text-cyan-400">Machine Learning</span>.
-            </p>
-            <div class="mt-10 flex justify-center gap-4">
-                <a href="https://github.com/SwagatamAdak/SwagatamAdak.github.io/raw/main/Swagatam_Adak_Resume_CV_2%20(1).pdf" class="bg-sky-500 text-white font-bold px-8 py-4 rounded-full shadow-lg shadow-sky-500/20 hover:bg-sky-600 hover:shadow-sky-500/40 transition-all duration-300 transform hover:scale-105">Download CV</a>
-                <a href="#contact" class="bg-slate-700 text-slate-200 font-bold px-8 py-4 rounded-full shadow-lg shadow-slate-900/50 hover:bg-slate-600 transition-all duration-300 transform hover:scale-105">Let's Connect</a>
+        <section id="hero" class="hero" role="banner">
+            <div class="hero-content">
+                <img src="https://placehold.co/400x400/0f172a/e2e8f0?text=SA" alt="Swagatam Adak" class="hero-image">
+                <h1 id="hero-title">Swagatam Adak</h1>
+                <p class="subtitle">
+                    Passionate about <span>Cybersecurity</span>, <span>High-Level Synthesis</span>, and <span>Machine Learning</span>.
+                </p>
+                <div class="cta-buttons">
+                    <a href="https://github.com/SwagatamAdak/SwagatamAdak.github.io/raw/main/Swagatam_Adak_Resume_CV_2%20(1).pdf" class="btn btn-primary" download>
+                        <i class="fas fa-download"></i> Download CV
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <i class="fas fa-envelope"></i> Get In Touch
+                    </a>
+                </div>
             </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-24">
-            <div class="glass-card p-8 md:p-12">
-                <h2 class="section-title">About Me</h2>
-                <div class="text-center max-w-4xl mx-auto text-slate-300 text-lg space-y-4">
-                    <p>
+        <section id="about" role="region" aria-label="About Me">
+            <h2 class="section-title">About Me</h2>
+            <div class="glass-card">
+                <div class="text-center max-w-4xl mx-auto text-slate-300 text-lg">
+                     <p>
                         I am an innovative and passionate undergraduate Bachelor of Technology student of Computer Science Engineering with a mindset dedicated to streamlining processes and efficiently resolving project issues. I am a quick learner and purpose-driven individual with the belief and determination that a target can be achieved with proper focus, research and execution.
                     </p>
                     <p>
@@ -111,221 +243,385 @@
                 </div>
             </div>
         </section>
-
+        
         <!-- Skills Section -->
-        <section id="skills" class="py-24">
+        <section id="skills" role="region" aria-label="Skills">
             <h2 class="section-title">Technical Skills</h2>
-            <div class="max-w-5xl mx-auto">
-                <div class="flex flex-wrap justify-center gap-4">
-                    <span class="skill-bubble">LLM Integration</span><span class="skill-bubble">High-Level Synthesis</span><span class="skill-bubble">Verilog HDL</span><span class="skill-bubble">Python</span><span class="skill-bubble">Java</span><span class="skill-bubble">C++</span><span class="skill-bubble">C</span><span class="skill-bubble">Shell Scripting</span><span class="skill-bubble">Matlab</span><span class="skill-bubble">JavaScript</span><span class="skill-bubble">Google Earth Engine</span><span class="skill-bubble">QGIS</span><span class="skill-bubble">NMap</span><span class="skill-bubble">Metasploit</span><span class="skill-bubble">Arduino</span><span class="skill-bubble">Google Cloud</span><span class="skill-bubble">LaTeX</span>
+            <div class="skills-grid">
+                <div class="skill-category glass-card">
+                    <h3><i class="fas fa-microchip"></i> AI & Hardware</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LLM Integration</span><span class="skill-tag">High-Level Synthesis</span><span class="skill-tag">Verilog HDL</span><span class="skill-tag">Formal Verification</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card">
+                    <h3><i class="fas fa-code"></i> Languages & Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span><span class="skill-tag">Java</span><span class="skill-tag">C++</span><span class="skill-tag">C</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Google Cloud</span><span class="skill-tag">LaTeX</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card">
+                    <h3><i class="fas fa-shield-halved"></i> Security & Data</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">NMap</span><span class="skill-tag">Metasploit</span><span class="skill-tag">Google Earth Engine</span><span class="skill-tag">QGIS</span><span class="skill-tag">Arduino</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Areas of Interest Section -->
-        <section id="interests" class="py-24">
+        <section id="interests" role="region" aria-label="Areas of Interest">
             <h2 class="section-title">Areas of Interest</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                <div class="glass-card p-6 text-center justify-center">
-                    <h3 class="font-semibold text-white">High-Level Synthesis</h3>
-                </div>
-                <div class="glass-card p-6 text-center justify-center">
-                    <h3 class="font-semibold text-white">Hardware Security</h3>
-                </div>
-                <div class="glass-card p-6 text-center justify-center">
-                    <h3 class="font-semibold text-white">AI for EDA</h3>
-                </div>
-                <div class="glass-card p-6 text-center justify-center">
-                    <h3 class="font-semibold text-white">Formal Verification</h3>
-                </div>
-                <div class="glass-card p-6 text-center justify-center">
-                    <h3 class="font-semibold text-white">Cyber-Physical Systems</h3>
-                </div>
-                <div class="glass-card p-6 text-center justify-center">
-                    <h3 class="font-semibold text-white">Remote Sensing</h3>
-                </div>
-                <div class="glass-card p-6 text-center justify-center">
-                    <h3 class="font-semibold text-white">Cryptography</h3>
-                </div>
-                 <div class="glass-card p-6 text-center justify-center">
-                    <h3 class="font-semibold text-white">Machine Learning</h3>
-                </div>
-                <div class="glass-card p-6 text-center justify-center">
-                    <h3 class="font-semibold text-white">Time Series Analysis</h3>
-                </div>
+            <div class="interests-grid">
+                <div class="interest-card glass-card"><i class="fas fa-brain mr-2"></i>AI for EDA</div>
+                <div class="interest-card glass-card"><i class="fas fa-sitemap mr-2"></i>High-Level Synthesis</div>
+                <div class="interest-card glass-card"><i class="fas fa-user-shield mr-2"></i>Hardware Security</div>
+                <div class="interest-card glass-card"><i class="fas fa-check-double mr-2"></i>Formal Verification</div>
+                <div class="interest-card glass-card"><i class="fas fa-network-wired mr-2"></i>Cyber-Physical Systems</div>
+                <div class="interest-card glass-card"><i class="fas fa-satellite-dish mr-2"></i>Remote Sensing</div>
+                <div class="interest-card glass-card"><i class="fas fa-key mr-2"></i>Cryptography</div>
+                <div class="interest-card glass-card"><i class="fas fa-robot mr-2"></i>Machine Learning</div>
+                <div class="interest-card glass-card"><i class="fas fa-chart-line mr-2"></i>Time Series Analysis</div>
             </div>
         </section>
 
-        <!-- Projects & Publications Section -->
-        <section id="projects" class="py-24">
+        <!-- Projects Section -->
+        <section id="projects" role="region" aria-label="Projects">
             <h2 class="section-title">Projects & Publications</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="glass-card p-8">
-                    <div class="flex-grow">
-                        <p class="text-sm text-sky-400 font-semibold mb-2">IIT GUWAHATI INTERNSHIP</p>
-                        <h3 class="text-2xl font-bold text-white mb-3">LLM Framework for High-Level Synthesis</h3>
-                        <p class="text-slate-400">Fine-tuned an LLM for precise C-to-Verilog mapping, extracted FSM/FSMD representations, and implementing reverse engineering for C code generation from Verilog RTL.</p>
+            <div class="project-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="ai-hls">AI/HLS</button>
+                <button class="filter-btn" data-filter="cybersecurity">Cybersecurity</button>
+                <button class="filter-btn" data-filter="remote-sensing">Remote Sensing</button>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card glass-card" data-category="ai-hls">
+                    <div class="project-content">
+                        <div class="conference">IIT GUWAHATI INTERNSHIP</div>
+                        <h3>LLM Framework for High-Level Synthesis</h3>
+                        <p>Fine-tuned an LLM for precise C-to-Verilog mapping and extracted FSM/FSMD representations to simplify hardware design.</p>
                     </div>
                 </div>
-                <div class="glass-card p-8">
-                    <div class="flex-grow">
-                        <p class="text-sm text-sky-400 font-semibold mb-2">ICNSBT 2025 CONFERENCE (SCOPUS)</p>
-                        <h3 class="text-2xl font-bold text-white mb-3">Hybrid Intrusion Detection System</h3>
-                        <p class="text-slate-400">Combining ML and DL to enhance threat detection, optimizing Random Forest with PCA for a balance of accuracy and efficiency.</p>
+                <div class="project-card glass-card" data-category="cybersecurity">
+                    <div class="project-content">
+                        <div class="conference">ICNSBT 2025 (SCOPUS)</div>
+                        <h3>Hybrid Intrusion Detection System</h3>
+                        <p>Combined ML and DL to enhance threat detection, optimizing Random Forest with PCA for accuracy and efficiency.</p>
                     </div>
                 </div>
-                <div class="glass-card p-8">
-                    <div class="flex-grow">
-                        <p class="text-sm text-sky-400 font-semibold mb-2">ICDSA 2024 CONFERENCE (SCOPUS)</p>
-                        <h3 class="text-2xl font-bold text-white mb-3">Structural Variation in Avicennia Community</h3>
-                        <p class="text-slate-400">A case study assessing structural variations in Avicennia species using scale profiling and the Laplacian of Gaussian filter.</p>
+                 <div class="project-card glass-card" data-category="cybersecurity">
+                    <div class="project-content">
+                        <div class="conference">ICDC 2025</div>
+                        <h3>Resilience of Cyber-Physical Systems</h3>
+                        <p>Simulated hybrid multi-stage attacks on CPS and developed layered defense strategies to enhance system robustness.</p>
                     </div>
                 </div>
-                <div class="glass-card p-8">
-                    <div class="flex-grow">
-                        <p class="text-sm text-sky-400 font-semibold mb-2">CSCT 2024 CONFERENCE (SCOPUS)</p>
-                        <h3 class="text-2xl font-bold text-white mb-3">Mangrove Health Analysis</h3>
-                        <p class="text-slate-400">Assessed mangrove health and urban heat stress using Landsat 8 and Sentinel-2 data with a novel MSVTI framework.</p>
+                <div class="project-card glass-card" data-category="remote-sensing">
+                    <div class="project-content">
+                        <div class="conference">ICDSA 2024 (SCOPUS)</div>
+                        <h3>Structural Variation in Avicennia Community</h3>
+                        <p>Assessed structural variations in Avicennia species using scale profiling and the Laplacian of Gaussian filter.</p>
                     </div>
                 </div>
-                <div class="glass-card p-8">
-                     <div class="flex-grow">
-                        <p class="text-sm text-sky-400 font-semibold mb-2">COMSYS 2024 CONFERENCE (SCOPUS)</p>
-                        <h3 class="text-2xl font-bold text-white mb-3">Mitigation of Salami Attacks in CPS</h3>
-                        <p class="text-slate-400">Explored Salami attacks in Cyber-Physical Systems, proposing robust security measures and detection strategies.</p>
+                <div class="project-card glass-card" data-category="remote-sensing">
+                    <div class="project-content">
+                        <div class="conference">CSCT 2024 (SCOPUS)</div>
+                        <h3>Mangrove Health Analysis</h3>
+                        <p>Used Landsat 8 and Sentinel-2 data with a novel MSVTI framework to assess mangrove health and urban heat stress.</p>
                     </div>
                 </div>
-                <div class="glass-card p-8">
-                     <div class="flex-grow">
-                        <p class="text-sm text-sky-400 font-semibold mb-2">ICDC 2025 CONFERENCE</p>
-                        <h3 class="text-2xl font-bold text-white mb-3">Resilience of Cyber-Physical Systems</h3>
-                        <p class="text-slate-400">Simulating hybrid multi-stage attacks on CPS and developing layered defense strategies to enhance system robustness.</p>
+                <div class="project-card glass-card" data-category="cybersecurity">
+                    <div class="project-content">
+                        <div class="conference">COMSYS 2024 (SCOPUS)</div>
+                        <h3>Mitigation of Salami Attacks in CPS</h3>
+                        <p>Explored Salami attacks in Cyber-Physical Systems and proposed robust security measures and detection strategies.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="py-24">
+        <section id="experience" role="region" aria-label="Experience">
             <h2 class="section-title">Experience & Activities</h2>
-            <div class="max-w-3xl mx-auto">
-                <div class="relative border-l-2 border-slate-700 pl-12">
-                    <div class="timeline-item mb-12">
-                        <p class="text-sm font-semibold text-sky-400">May 2025 - Present</p>
-                        <h3 class="text-xl font-bold text-white">Summer Intern - IIT Guwahati</h3>
-                        <p class="mt-1 text-slate-400">Developing an LLM-based framework to simplify hardware design by correlating C-level behavior with synthesized Verilog RTL under Dr. Chandan Karfa.</p>
-                    </div>
-                    <div class="timeline-item mb-12">
-                        <p class="text-sm font-semibold text-sky-400">2024</p>
-                        <h3 class="text-xl font-bold text-white">Smart India Hackathon (SIH) Participant</h3>
-                        <p class="mt-1 text-slate-400">Advanced to the national level, working on a LangChain-based LLM deployed with Google Cloud Run.</p>
-                    </div>
-                    <div class="timeline-item mb-12">
-                        <p class="text-sm font-semibold text-sky-400">Aug 2024</p>
-                        <h3 class="text-xl font-bold text-white">Avalanche Winner at StatusCode1</h3>
-                        <p class="mt-1 text-slate-400">Developed and deployed smart contracts on Avalanche Fuji testnet to create a decentralized gaming platform.</p>
-                    </div>
-                    <div class="timeline-item mb-12">
-                        <p class="text-sm font-semibold text-sky-400">Dec 2023</p>
-                        <h3 class="text-xl font-bold text-white">2nd Runner Up at Circuithon</h3>
-                        <p class="mt-1 text-slate-400">Worked with Arduino to build electronic devices, enhancing teamwork and project management skills.</p>
-                    </div>
-                    <div class="timeline-item mb-12">
-                        <p class="text-sm font-semibold text-sky-400">Jul 2023</p>
-                        <h3 class="text-xl font-bold text-white">Study Abroad Program at NUS, Singapore</h3>
-                        <p class="mt-1 text-slate-400">Gained insights into advanced methods in Cybersecurity and Machine Learning.</p>
-                    </div>
+            <div class="timeline">
+                <div class="timeline-item glass-card">
+                    <div class="timeline-date">May 2025 - Present</div>
+                    <h3>Summer Intern - IIT Guwahati</h3>
+                    <p>Under Dr. Chandan Karfa, developing an LLM-based framework to simplify hardware design by correlating C-level behavior with synthesized Verilog RTL.</p>
+                </div>
+                <div class="timeline-item glass-card">
+                    <div class="timeline-date">2024</div>
+                    <h3>Smart India Hackathon (SIH) Participant</h3>
+                    <p>Advanced to the national level, working on a LangChain-based LLM deployed with Google Cloud Run.</p>
+                </div>
+                <div class="timeline-item glass-card">
+                    <div class="timeline-date">Aug 2024</div>
+                    <h3>Avalanche Winner at StatusCode1</h3>
+                    <p>Developed and deployed smart contracts on Avalanche Fuji testnet to create a decentralized gaming platform.</p>
+                </div>
+                <div class="timeline-item glass-card">
+                    <div class="timeline-date">Dec 2023</div>
+                    <h3>2nd Runner Up at Circuithon (IEEE IEM CAS)</h3>
+                    <p>Worked with Arduino to build electronic devices, enhancing teamwork and project management skills.</p>
+                </div>
+                <div class="timeline-item glass-card">
+                    <div class="timeline-date">Jul 2023</div>
+                    <h3>Study Abroad Program at NUS, Singapore</h3>
+                    <p>Gained insights into advanced methods in Cybersecurity and Machine Learning.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Education and Certifications Section -->
-        <section id="education" class="py-24">
+        <!-- Education Section -->
+        <section id="education" role="region" aria-label="Education">
             <h2 class="section-title">Education & Certifications</h2>
-            <div class="grid md:grid-cols-5 gap-8">
-                <div class="md:col-span-3 space-y-6">
-                    <div class="glass-card p-6">
-                        <p class="font-bold text-white">Bachelor of Technology, CSE</p>
-                        <p class="text-slate-300">Institute of Engineering and Management, Kolkata</p>
-                        <p class="text-sm text-slate-400">2022 - Present | CGPA: 8.64 (upto 5th sem)</p>
+            <div class="contact-grid">
+                <div class="timeline">
+                    <div class="timeline-item glass-card">
+                        <div class="timeline-date">2022 - Present</div>
+                        <h3>Bachelor of Technology, CSE</h3>
+                        <p>Institute of Engineering and Management, Kolkata</p>
+                        <p><strong>CGPA:</strong> 8.64 (upto 5th semester)</p>
                     </div>
-                    <div class="glass-card p-6">
-                        <p class="font-bold text-white">School Education</p>
-                        <p class="text-slate-300">Calcutta Boys' School, Kolkata</p>
-                        <hr class="border-slate-700 my-3">
-                        <div class="text-sm text-slate-400 space-y-1">
-                           <p>Indian School Certificate (ISC, Class 12) - 2021 | 88.8%</p>
-                           <p>Indian Certificate of Secondary Education (ICSE, Class 10) - 2019 | 89.83%</p>
+                    <div class="timeline-item glass-card">
+                        <div class="timeline-date">2019 - 2021</div>
+                        <h3>School Education</h3>
+                        <p>Calcutta Boys' School, Kolkata</p>
+                        <p><strong>ISC (Class 12):</strong> 88.8% | <strong>ICSE (Class 10):</strong> 89.83%</p>
+                    </div>
+                </div>
+                <div class="skills-grid">
+                    <div id="certifications" class="skill-category glass-card">
+                         <h3><i class="fas fa-certificate"></i> Certifications</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">NPTEL: Programming in Java</span>
+                            <span class="skill-tag">NPTEL: Practical Cyber Security</span>
+                            <span class="skill-tag">NPTEL: Ethical Hacking</span>
                         </div>
                     </div>
                 </div>
-                <div class="md:col-span-2 space-y-6">
-                    <div class="glass-card p-6">
-                        <p class="font-bold text-white">NPTEL: Java</p>
-                        <p class="text-slate-400">IIT Kharagpur</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" role="region" aria-label="Contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="glass-card" style="padding: 2rem 3rem;">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <p class="mb-8">I'm currently seeking new opportunities and am open to collaborations. Feel free to reach out via email or connect with me on social media.</p>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+919830028753">+91 98300 28753</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:swagatamadak96@gmail.com">swagatamadak96@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="https://www.linkedin.com/in/swagatam-adak-84a615270" target="_blank">linkedin.com/in/swagatam-adak</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-github"></i>
+                            <a href="https://github.com/SwagatamAdak" target="_blank">github.com/SwagatamAdak</a>
+                        </div>
                     </div>
-                    <div class="glass-card p-6">
-                        <p class="font-bold text-white">NPTEL: Cyber Security</p>
-                        <p class="text-slate-400">IIT Kanpur</p>
-                    </div>
-                     <div class="glass-card p-6">
-                        <p class="font-bold text-white">NPTEL: Ethical Hacking</p>
-                        <p class="text-slate-400">IIT Kharagpur</p>
-                    </div>
+                    <form id="contact-form" class="w-full">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required placeholder="Your Email">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="5" required placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-full">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
-    </main>
+    </div>
 
     <!-- Footer -->
-    <footer id="contact" class="py-20 border-t border-slate-800">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold text-white mb-4">Get In Touch</h2>
-            <p class="max-w-xl mx-auto mb-8 text-slate-400">I'm currently seeking new opportunities and am open to collaborations. Feel free to reach out!</p>
-            <div class="flex justify-center items-center space-x-8">
-                <a href="mailto:swagatamadak96@gmail.com" class="text-slate-400 hover:text-sky-400 transition-colors duration-300 transform hover:scale-125">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/swagatam-adak-84a615270" target="_blank" class="text-slate-400 hover:text-sky-400 transition-colors duration-300 transform hover:scale-125">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                </a>
-                <a href="https://github.com/SwagatamAdak" target="_blank" class="text-slate-400 hover:text-sky-400 transition-colors duration-300 transform hover:scale-125">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                </a>
-            </div>
-            <p class="mt-12 text-sm text-slate-500">&copy; 2024 Swagatam Adak. Designed with inspiration and code.</p>
-        </div>
+    <footer role="contentinfo">
+        <ul class="social-links">
+            <li><a href="https://github.com/SwagatamAdak" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/swagatam-adak-84a615270" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="mailto:swagatamadak96@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a></li>
+        </ul>
+        <p>© 2025 Swagatam Adak. All rights reserved.</p>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <script>
-        // Use ScrollReveal to animate elements on scroll
-        const sr = ScrollReveal({
-            distance: '50px',
-            duration: 1500,
-            easing: 'cubic-bezier(0.5, 0, 0, 1)',
-            reset: false,
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Preloader ---
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 500);
         });
 
-        sr.reveal('#hero h1, #hero p, #hero .flex', { delay: 200, origin: 'bottom' });
-        sr.reveal('#hero div:first-child', { delay: 100, origin: 'top', scale: 0.9 });
-
-        sr.reveal('.section-title', { delay: 100, origin: 'top' });
+        // --- Particle Animation ---
+        const particlesContainer = document.getElementById('particles');
+        if(particlesContainer) {
+            const count = window.innerWidth < 768 ? 30 : 60;
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = `${Math.random() * 8}s`;
+                particle.style.width = `${Math.random() * 2 + 1}px`;
+                particle.style.height = particle.style.width;
+                particlesContainer.appendChild(particle);
+            }
+        }
         
-        sr.reveal('#about .glass-card', { delay: 200, origin: 'left' });
-
-        sr.reveal('.skill-bubble', { delay: 100, interval: 50, origin: 'bottom', scale: 0.9 });
+        // --- GSAP Animations ---
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from('.hero-content', { duration: 1, y: 50, opacity: 0, ease: 'power3.out', delay: 0.5 });
         
-        sr.reveal('#interests .glass-card', { delay: 200, interval: 100, origin: 'bottom', scale: 0.95 });
-
-        sr.reveal('#projects .glass-card', { delay: 200, interval: 100, origin: 'bottom', scale: 0.95 });
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            if (section.id !== 'about') { // Exclude about section from generic animation
+                gsap.from(section.children, {
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    stagger: 0.2,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            }
+        });
         
-        sr.reveal('.timeline-item', { delay: 200, interval: 200, origin: 'left' });
+        // Specific animation for about section to avoid content disappearing
+        gsap.from('#about .glass-card', {
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '#about',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            }
+        });
 
-        sr.reveal('#education .md\\:col-span-3 .glass-card', { delay: 200, interval: 100, origin: 'left' });
-        sr.reveal('#education .md\\:col-span-2 .glass-card', { delay: 300, interval: 100, origin: 'right' });
+
+        // --- Typing Effect ---
+        const heroTitle = document.getElementById('hero-title');
+        if(heroTitle){
+            const originalText = heroTitle.textContent;
+            let i = 0;
+            heroTitle.textContent = '';
+            function typeWriter() {
+                if (i < originalText.length) {
+                    heroTitle.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            setTimeout(typeWriter, 1000); // Start after initial animation
+        }
         
-        sr.reveal('#contact h2, #contact p, #contact .flex', { delay: 200, origin: 'bottom' });
+        // --- Navbar Scroll ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
 
+        // --- Mobile Menu ---
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+        if(mobileMenuBtn && navLinks){
+            mobileMenuBtn.addEventListener('click', () => {
+                const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+                mobileMenuBtn.innerHTML = isExpanded ? '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
+            });
+             document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            });
+        }
+        
+        // --- Project Filtering ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const filter = button.dataset.filter;
+
+                projectCards.forEach(card => {
+                    const category = card.dataset.category;
+                    const shouldShow = filter === 'all' || category === filter;
+                    
+                    gsap.to(card, {
+                        opacity: shouldShow ? 1 : 0,
+                        y: shouldShow ? 0 : 20,
+                        duration: 0.4,
+                        display: shouldShow ? 'flex' : 'none'
+                    });
+                });
+            });
+        });
+
+        // --- Contact Form ---
+        const form = document.getElementById('contact-form');
+        if(form){
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const message = formData.get('message');
+                const subject = `Message from ${name} via Portfolio`;
+                
+                const mailtoLink = `mailto:swagatamadak96@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+                
+                window.location.href = mailtoLink;
+                form.reset();
+            });
+        }
+
+        // --- Back to Top & Progress Bar ---
+        const backToTop = document.getElementById('back-to-top');
+        const progressBar = document.getElementById('progress-bar');
+        window.addEventListener('scroll', () => {
+            // Back to Top
+            backToTop.classList.toggle('visible', window.scrollY > 300);
+            
+            // Progress Bar
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+    });
     </script>
 </body>
 </html>
