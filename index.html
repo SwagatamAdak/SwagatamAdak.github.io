@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swagatam Adak | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+            color: #e2e8f0; /* slate-200 */
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5); /* slate-800 with opacity */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.5); /* slate-700 with opacity */
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(96, 165, 250, 0.5); /* blue-400 with opacity */
+        }
+        .section-title {
+            @apply text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-cyan-300;
+        }
+        .skill-bubble {
+            @apply text-sm font-semibold px-4 py-2 rounded-full cursor-pointer transition-all duration-300;
+            background: rgba(51, 65, 85, 0.7); /* slate-700 */
+            border: 1px solid transparent;
+        }
+        .skill-bubble:hover {
+            transform: scale(1.1);
+            background: rgba(96, 165, 250, 0.2); /* blue-400 with opacity */
+            border-color: #60a5fa; /* blue-400 */
+            color: #60a5fa;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #38bdf8; /* sky-400 */
+            border: 4px solid #1e293b; /* slate-800 */
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="w-full h-full">
+
+    <!-- Header & Navigation -->
+    <header class="bg-slate-900/60 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-cyan-300">SA</a>
+                <nav class="hidden md:flex space-x-8 text-slate-300">
+                    <a href="#about" class="hover:text-sky-400 transition-colors duration-300">About</a>
+                    <a href="#skills" class="hover:text-sky-400 transition-colors duration-300">Skills</a>
+                    <a href="#interests" class="hover:text-sky-400 transition-colors duration-300">Interests</a>
+                    <a href="#projects" class="hover:text-sky-400 transition-colors duration-300">Projects</a>
+                    <a href="#experience" class="hover:text-sky-400 transition-colors duration-300">Experience</a>
+                    <a href="#education" class="hover:text-sky-400 transition-colors duration-300">Education</a>
+                    <a href="#contact" class="hover:text-sky-400 transition-colors duration-300">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 pt-28">
+
+        <!-- Hero Section -->
+        <section id="hero" class="text-center py-24 flex flex-col items-center">
+             <div class="w-48 h-48 mb-8">
+                 <img src="https://placehold.co/400x400/334155/94a3b8?text=SA" alt="Swagatam Adak" class="rounded-full shadow-2xl border-4 border-slate-700 object-cover w-full h-full">
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-white">
+                Swagatam Adak
+            </h1>
+            <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-400 font-light">
+                Computer Science student passionate about <span class="font-semibold text-sky-400">Cybersecurity</span>, <span class="font-semibold text-teal-400">Remote Sensing</span>, and <span class="font-semibold text-cyan-400">Machine Learning</span>.
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="https://github.com/SwagatamAdak/SwagatamAdak.github.io/raw/main/Swagatam_Adak_Resume_CV_2%20(1).pdf" class="bg-sky-500 text-white font-bold px-8 py-4 rounded-full shadow-lg shadow-sky-500/20 hover:bg-sky-600 hover:shadow-sky-500/40 transition-all duration-300 transform hover:scale-105">Download CV</a>
+                <a href="#contact" class="bg-slate-700 text-slate-200 font-bold px-8 py-4 rounded-full shadow-lg shadow-slate-900/50 hover:bg-slate-600 transition-all duration-300 transform hover:scale-105">Let's Connect</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24">
+            <div class="glass-card p-8 md:p-12">
+                <h2 class="section-title">About Me</h2>
+                <div class="text-center max-w-4xl mx-auto text-slate-300 text-lg space-y-4">
+                    <p>
+                        I am an innovative and passionate undergraduate Bachelor of Technology student of Computer Science Engineering with a mindset dedicated to streamlining processes and efficiently resolving project issues. I am a quick learner and purpose-driven individual with the belief and determination that a target can be achieved with proper focus, research and execution.
+                    </p>
+                    <p>
+                         My research experience spans environmental monitoring using multispectral data, cybersecurity threats like Salami attacks, and developing Hybrid Intrusion Detection Systems. More recently, I have been focused on the intersection of AI and hardware design, developing an LLM-based framework for High-Level Synthesis (HLS) at IIT Guwahati. This work involves fine-tuning models for C-to-Verilog correlation and exploring formal verification to simplify and validate complex hardware designs for non-experts.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="max-w-5xl mx-auto">
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="skill-bubble">LLM Integration</span><span class="skill-bubble">High-Level Synthesis</span><span class="skill-bubble">Verilog HDL</span><span class="skill-bubble">Python</span><span class="skill-bubble">Java</span><span class="skill-bubble">C++</span><span class="skill-bubble">C</span><span class="skill-bubble">Shell Scripting</span><span class="skill-bubble">Matlab</span><span class="skill-bubble">JavaScript</span><span class="skill-bubble">Google Earth Engine</span><span class="skill-bubble">QGIS</span><span class="skill-bubble">NMap</span><span class="skill-bubble">Metasploit</span><span class="skill-bubble">Arduino</span><span class="skill-bubble">Google Cloud</span><span class="skill-bubble">LaTeX</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Areas of Interest Section -->
+        <section id="interests" class="py-24">
+            <h2 class="section-title">Areas of Interest</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="glass-card p-6 text-center justify-center">
+                    <h3 class="font-semibold text-white">High-Level Synthesis</h3>
+                </div>
+                <div class="glass-card p-6 text-center justify-center">
+                    <h3 class="font-semibold text-white">Hardware Security</h3>
+                </div>
+                <div class="glass-card p-6 text-center justify-center">
+                    <h3 class="font-semibold text-white">AI for EDA</h3>
+                </div>
+                <div class="glass-card p-6 text-center justify-center">
+                    <h3 class="font-semibold text-white">Formal Verification</h3>
+                </div>
+                <div class="glass-card p-6 text-center justify-center">
+                    <h3 class="font-semibold text-white">Cyber-Physical Systems</h3>
+                </div>
+                <div class="glass-card p-6 text-center justify-center">
+                    <h3 class="font-semibold text-white">Remote Sensing</h3>
+                </div>
+                <div class="glass-card p-6 text-center justify-center">
+                    <h3 class="font-semibold text-white">Cryptography</h3>
+                </div>
+                 <div class="glass-card p-6 text-center justify-center">
+                    <h3 class="font-semibold text-white">Machine Learning</h3>
+                </div>
+                <div class="glass-card p-6 text-center justify-center">
+                    <h3 class="font-semibold text-white">Time Series Analysis</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects & Publications Section -->
+        <section id="projects" class="py-24">
+            <h2 class="section-title">Projects & Publications</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card p-8">
+                    <div class="flex-grow">
+                        <p class="text-sm text-sky-400 font-semibold mb-2">IIT GUWAHATI INTERNSHIP</p>
+                        <h3 class="text-2xl font-bold text-white mb-3">LLM Framework for High-Level Synthesis</h3>
+                        <p class="text-slate-400">Fine-tuned an LLM for precise C-to-Verilog mapping, extracted FSM/FSMD representations, and implementing reverse engineering for C code generation from Verilog RTL.</p>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                    <div class="flex-grow">
+                        <p class="text-sm text-sky-400 font-semibold mb-2">ICNSBT 2025 CONFERENCE (SCOPUS)</p>
+                        <h3 class="text-2xl font-bold text-white mb-3">Hybrid Intrusion Detection System</h3>
+                        <p class="text-slate-400">Combining ML and DL to enhance threat detection, optimizing Random Forest with PCA for a balance of accuracy and efficiency.</p>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                    <div class="flex-grow">
+                        <p class="text-sm text-sky-400 font-semibold mb-2">ICDSA 2024 CONFERENCE (SCOPUS)</p>
+                        <h3 class="text-2xl font-bold text-white mb-3">Structural Variation in Avicennia Community</h3>
+                        <p class="text-slate-400">A case study assessing structural variations in Avicennia species using scale profiling and the Laplacian of Gaussian filter.</p>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                    <div class="flex-grow">
+                        <p class="text-sm text-sky-400 font-semibold mb-2">CSCT 2024 CONFERENCE (SCOPUS)</p>
+                        <h3 class="text-2xl font-bold text-white mb-3">Mangrove Health Analysis</h3>
+                        <p class="text-slate-400">Assessed mangrove health and urban heat stress using Landsat 8 and Sentinel-2 data with a novel MSVTI framework.</p>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                     <div class="flex-grow">
+                        <p class="text-sm text-sky-400 font-semibold mb-2">COMSYS 2024 CONFERENCE (SCOPUS)</p>
+                        <h3 class="text-2xl font-bold text-white mb-3">Mitigation of Salami Attacks in CPS</h3>
+                        <p class="text-slate-400">Explored Salami attacks in Cyber-Physical Systems, proposing robust security measures and detection strategies.</p>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                     <div class="flex-grow">
+                        <p class="text-sm text-sky-400 font-semibold mb-2">ICDC 2025 CONFERENCE</p>
+                        <h3 class="text-2xl font-bold text-white mb-3">Resilience of Cyber-Physical Systems</h3>
+                        <p class="text-slate-400">Simulating hybrid multi-stage attacks on CPS and developing layered defense strategies to enhance system robustness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-24">
+            <h2 class="section-title">Experience & Activities</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="relative border-l-2 border-slate-700 pl-12">
+                    <div class="timeline-item mb-12">
+                        <p class="text-sm font-semibold text-sky-400">May 2025 - Present</p>
+                        <h3 class="text-xl font-bold text-white">Summer Intern - IIT Guwahati</h3>
+                        <p class="mt-1 text-slate-400">Developing an LLM-based framework to simplify hardware design by correlating C-level behavior with synthesized Verilog RTL under Dr. Chandan Karfa.</p>
+                    </div>
+                    <div class="timeline-item mb-12">
+                        <p class="text-sm font-semibold text-sky-400">2024</p>
+                        <h3 class="text-xl font-bold text-white">Smart India Hackathon (SIH) Participant</h3>
+                        <p class="mt-1 text-slate-400">Advanced to the national level, working on a LangChain-based LLM deployed with Google Cloud Run.</p>
+                    </div>
+                    <div class="timeline-item mb-12">
+                        <p class="text-sm font-semibold text-sky-400">Aug 2024</p>
+                        <h3 class="text-xl font-bold text-white">Avalanche Winner at StatusCode1</h3>
+                        <p class="mt-1 text-slate-400">Developed and deployed smart contracts on Avalanche Fuji testnet to create a decentralized gaming platform.</p>
+                    </div>
+                    <div class="timeline-item mb-12">
+                        <p class="text-sm font-semibold text-sky-400">Dec 2023</p>
+                        <h3 class="text-xl font-bold text-white">2nd Runner Up at Circuithon</h3>
+                        <p class="mt-1 text-slate-400">Worked with Arduino to build electronic devices, enhancing teamwork and project management skills.</p>
+                    </div>
+                    <div class="timeline-item mb-12">
+                        <p class="text-sm font-semibold text-sky-400">Jul 2023</p>
+                        <h3 class="text-xl font-bold text-white">Study Abroad Program at NUS, Singapore</h3>
+                        <p class="mt-1 text-slate-400">Gained insights into advanced methods in Cybersecurity and Machine Learning.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education and Certifications Section -->
+        <section id="education" class="py-24">
+            <h2 class="section-title">Education & Certifications</h2>
+            <div class="grid md:grid-cols-5 gap-8">
+                <div class="md:col-span-3 space-y-6">
+                    <div class="glass-card p-6">
+                        <p class="font-bold text-white">Bachelor of Technology, CSE</p>
+                        <p class="text-slate-300">Institute of Engineering and Management, Kolkata</p>
+                        <p class="text-sm text-slate-400">2022 - Present | CGPA: 8.64 (upto 5th sem)</p>
+                    </div>
+                    <div class="glass-card p-6">
+                        <p class="font-bold text-white">School Education</p>
+                        <p class="text-slate-300">Calcutta Boys' School, Kolkata</p>
+                        <hr class="border-slate-700 my-3">
+                        <div class="text-sm text-slate-400 space-y-1">
+                           <p>Indian School Certificate (ISC, Class 12) - 2021 | 88.8%</p>
+                           <p>Indian Certificate of Secondary Education (ICSE, Class 10) - 2019 | 89.83%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-2 space-y-6">
+                    <div class="glass-card p-6">
+                        <p class="font-bold text-white">NPTEL: Java</p>
+                        <p class="text-slate-400">IIT Kharagpur</p>
+                    </div>
+                    <div class="glass-card p-6">
+                        <p class="font-bold text-white">NPTEL: Cyber Security</p>
+                        <p class="text-slate-400">IIT Kanpur</p>
+                    </div>
+                     <div class="glass-card p-6">
+                        <p class="font-bold text-white">NPTEL: Ethical Hacking</p>
+                        <p class="text-slate-400">IIT Kharagpur</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-20 border-t border-slate-800">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-white mb-4">Get In Touch</h2>
+            <p class="max-w-xl mx-auto mb-8 text-slate-400">I'm currently seeking new opportunities and am open to collaborations. Feel free to reach out!</p>
+            <div class="flex justify-center items-center space-x-8">
+                <a href="mailto:swagatamadak96@gmail.com" class="text-slate-400 hover:text-sky-400 transition-colors duration-300 transform hover:scale-125">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/swagatam-adak-84a615270" target="_blank" class="text-slate-400 hover:text-sky-400 transition-colors duration-300 transform hover:scale-125">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://github.com/SwagatamAdak" target="_blank" class="text-slate-400 hover:text-sky-400 transition-colors duration-300 transform hover:scale-125">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+            <p class="mt-12 text-sm text-slate-500">&copy; 2024 Swagatam Adak. Designed with inspiration and code.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Use ScrollReveal to animate elements on scroll
+        const sr = ScrollReveal({
+            distance: '50px',
+            duration: 1500,
+            easing: 'cubic-bezier(0.5, 0, 0, 1)',
+            reset: false,
+        });
+
+        sr.reveal('#hero h1, #hero p, #hero .flex', { delay: 200, origin: 'bottom' });
+        sr.reveal('#hero div:first-child', { delay: 100, origin: 'top', scale: 0.9 });
+
+        sr.reveal('.section-title', { delay: 100, origin: 'top' });
+        
+        sr.reveal('#about .glass-card', { delay: 200, origin: 'left' });
+
+        sr.reveal('.skill-bubble', { delay: 100, interval: 50, origin: 'bottom', scale: 0.9 });
+        
+        sr.reveal('#interests .glass-card', { delay: 200, interval: 100, origin: 'bottom', scale: 0.95 });
+
+        sr.reveal('#projects .glass-card', { delay: 200, interval: 100, origin: 'bottom', scale: 0.95 });
+        
+        sr.reveal('.timeline-item', { delay: 200, interval: 200, origin: 'left' });
+
+        sr.reveal('#education .md\\:col-span-3 .glass-card', { delay: 200, interval: 100, origin: 'left' });
+        sr.reveal('#education .md\\:col-span-2 .glass-card', { delay: 300, interval: 100, origin: 'right' });
+        
+        sr.reveal('#contact h2, #contact p, #contact .flex', { delay: 200, origin: 'bottom' });
+
+    </script>
+</body>
+</html>
